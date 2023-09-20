@@ -2,6 +2,7 @@ import React from "react";
 import { useLucasForm } from "../../hooks/useLucasForm";
 const CITIES = ["Paris", "London", "New York"];
 function Form() {
+  // hook reusable in any form
   const lucasForm = useLucasForm({
     initialValues: {
       name: {

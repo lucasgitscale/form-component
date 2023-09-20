@@ -25,6 +25,7 @@ function useLucasForm({
   const [onSubmitting, setOnSubmitting] = React.useState<boolean>(false)
 
   const validate = useCallback((values: any) => {
+
     const errors: any = {}
 
     if (!schemaValidation) {
@@ -72,29 +73,42 @@ function useLucasForm({
 
   const handleReset = useCallback(() => {
     setValues(initialValues)
+
     setGeneralError(null)
+
     setOnSubmitting(false)
+
     setErrors({})
+
   }, [initialValues])
 
   const handleSubmit = useCallback(async (e: { preventDefault: any }) => {
     e.preventDefault()
     if (Object.keys(validate(values)).length > 0) {
+
       setErrors(validate(values))
+
       return
     }
+
     setOnSubmitting(true)
     try {
       await new Promise((resolve) => setTimeout(resolve, 4000))
+
       await onSubmit(values)
+
       setOnSubmitting(false)
+
       handleReset()
     } catch (error: any) {
       setGeneralError(error.message)
+
       setOnSubmitting(false)
+
       console.error(error)
     }
   }, [handleReset, onSubmit, validate, values])
+
 
   return (
     {
